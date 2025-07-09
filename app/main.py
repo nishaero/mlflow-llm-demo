@@ -1,7 +1,7 @@
 import time, json
 from fastapi import FastAPI
 from pydantic import BaseModel
-from llm_runner import generate
+from .llm_runner import generate
 from mlflow_utils import start_run
 import mlflow
 
