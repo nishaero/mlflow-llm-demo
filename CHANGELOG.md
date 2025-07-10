@@ -1,3 +1,9 @@
+## [1.0.4](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.3...v1.0.4) (2025-07-10)
+
+### Bug Fixes
+
+* update model to meta-llama/Meta-Llama-3-8B-Instruct ([1ba92a8](https://github.com/nishaero/mlflow-llm-demo/commit/1ba92a8d179c46f5ba9a6d8d95e8e1f8080f335c))
+
 ## [1.0.3](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.2...v1.0.3) (2025-07-10)
 
 ### Bug Fixes
