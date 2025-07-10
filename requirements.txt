@@ -7,3 +7,4 @@ pydantic
 langchain
 pillow
 accelerate
+bitsandbytes

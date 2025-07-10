@@ -13,11 +13,15 @@ app = FastAPI()
 MODEL_NAME = "meta-llama/Meta-Llama-3-70B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
-model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map="auto", torch_dtype="auto", use_auth_token=True)
-
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_NAME,
+    device_map="auto",
+    torch_dtype="auto",
+    use_auth_token=True,
+    load_in_4bit=True,  # Quantized loading for large models, needs bitsandbytes
+)
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
-# Serve a simple chat UI at "/"
 @app.get("/", response_class=HTMLResponse)
 async def chat_ui():
     return """
@@ -37,7 +41,7 @@ async def chat_ui():
     </head>
     <body>
         <div id="chat">
-            <h2>LLM Chat</h2>
+            <h2>LLM Chat (Llama-3 70B)</h2>
             <div id="messages"></div>
             <input id="input" type="text" placeholder="Type your message..." autocomplete="off"/>
             <button id="send">Send</button>
@@ -79,5 +83,5 @@ async def chat_ui():
 async def generate_text(request: Request):
     data = await request.json()
     prompt = data.get("prompt", "")
-    output = generator(prompt, max_new_tokens=100)
+    output = generator(prompt, max_new_tokens=256)
     return JSONResponse({"response": output[0]["generated_text"]})
