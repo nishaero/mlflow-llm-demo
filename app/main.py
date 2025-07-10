@@ -10,7 +10,7 @@ if hf_token:
 
 app = FastAPI()
 
-MODEL_NAME = "meta-llama/Meta-Llama-3-70B-Instruct"
+MODEL_NAME = "meta-llama/Meta-Llama-3-8B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
 quant_config = BitsAndBytesConfig(load_in_4bit=True)
