@@ -1,3 +1,9 @@
+## [1.0.7](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.6...v1.0.7) (2025-07-10)
+
+### Bug Fixes
+
+* update model hugging-quants/Meta-Llama-3.1-70B-Instruct-GPTQ-INT4 ([23ea3d0](https://github.com/nishaero/mlflow-llm-demo/commit/23ea3d008eb2199ad421f204778ced6fb2aa9138))
+
 ## [1.0.6](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.5...v1.0.6) (2025-07-10)
 
 ### Bug Fixes
