@@ -1,3 +1,9 @@
+## [1.0.6](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.5...v1.0.6) (2025-07-10)
+
+### Bug Fixes
+
+* update model to use llama-3-32b.Q4_K_M.gguf ([50984e6](https://github.com/nishaero/mlflow-llm-demo/commit/50984e68a6ad26568630bd84ded0a433f65ced9a))
+
 ## [1.0.5](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.4...v1.0.5) (2025-07-10)
 
 ### Bug Fixes
