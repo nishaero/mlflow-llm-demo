@@ -6,3 +6,4 @@ mlflow
 pydantic
 langchain
 pillow
+accelerate
