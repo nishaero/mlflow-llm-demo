@@ -10,7 +10,7 @@ if hf_token:
 
 app = FastAPI()
 
-MODEL_NAME = "microsoft/phi-3-medium-128k-instruct"
+MODEL_NAME = "meta-llama/Meta-Llama-3-70B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForCausalLM.from_pretrained(
