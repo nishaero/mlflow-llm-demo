@@ -10,15 +10,14 @@ if hf_token:
 
 app = FastAPI()
 
-MODEL_NAME = "meta-llama/Meta-Llama-3-70B-Instruct"
+MODEL_NAME = "microsoft/phi-3-medium-128k-instruct"
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     device_map="auto",
     torch_dtype="auto",
-    use_auth_token=True,
-    load_in_4bit=True,  # Quantized loading for large models, needs bitsandbytes
+    load_in_4bit=True,  # bitsandbytes needed
 )
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
@@ -41,7 +40,7 @@ async def chat_ui():
     </head>
     <body>
         <div id="chat">
-            <h2>LLM Chat (Llama-3 70B)</h2>
+            <h2>LLM Chat (Phi-3 Medium 128k)</h2>
             <div id="messages"></div>
             <input id="input" type="text" placeholder="Type your message..." autocomplete="off"/>
             <button id="send">Send</button>
