@@ -11,12 +11,9 @@ RUN apt-get update && apt-get install -y \
 # Upgrade pip
 RUN pip install --upgrade pip
 
-# Install Python dependencies from requirements.txt
+# Install Python dependencies
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
-
-# Install llama-cpp-python with CUDA support
-RUN pip install --upgrade llama-cpp-python --extra-index-url https://pypi.nvidia.com
 
 # Copy application code
 COPY . /app

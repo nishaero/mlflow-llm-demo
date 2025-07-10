@@ -9,3 +9,5 @@ pillow
 accelerate
 bitsandbytes
 llama-cpp-python
+auto-gptq
+optimum
