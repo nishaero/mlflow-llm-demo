@@ -1,5 +1,11 @@
+import os
+from huggingface_hub import login
 from fastapi import FastAPI, Request
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+
+hf_token = os.getenv("HUGGINGFACE_HUB_TOKEN")
+if hf_token:
+    login(token=hf_token)
 
 app = FastAPI()
 
