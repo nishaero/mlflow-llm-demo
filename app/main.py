@@ -2,7 +2,7 @@ import os
 from huggingface_hub import login
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, BitsAndBytesConfig
 
 hf_token = os.getenv("HUGGINGFACE_HUB_TOKEN")
 if hf_token:
@@ -12,13 +12,16 @@ app = FastAPI()
 
 MODEL_NAME = "meta-llama/Meta-Llama-3-70B-Instruct"
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
+quant_config = BitsAndBytesConfig(load_in_4bit=True)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     device_map="auto",
     torch_dtype="auto",
-    load_in_4bit=True,  # requires bitsandbytes in requirements.txt
+    quantization_config=quant_config,
+    use_auth_token=True
 )
+
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
 @app.get("/", response_class=HTMLResponse)
