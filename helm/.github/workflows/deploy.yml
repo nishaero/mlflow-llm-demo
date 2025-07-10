@@ -1,4 +1,4 @@
-name: Build and Deploy to RunPod
+name: Build push to GitHub Container Registry
 
 on:
   push:
@@ -11,6 +11,7 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    environment: dev
     permissions:
       packages: write
       contents: read
