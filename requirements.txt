@@ -8,3 +8,4 @@ langchain
 pillow
 accelerate
 bitsandbytes
+llama-cpp-python
