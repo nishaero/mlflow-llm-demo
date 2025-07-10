@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.2...v1.0.3) (2025-07-10)
+
+### Bug Fixes
+
+* use bitsandbytes for quantization ([f743f32](https://github.com/nishaero/mlflow-llm-demo/commit/f743f320306dd520c0b90762620d0ded87a29b59))
+
 ## [1.0.2](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.1...v1.0.2) (2025-07-10)
 
 ### Bug Fixes
