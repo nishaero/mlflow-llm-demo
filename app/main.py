@@ -10,7 +10,7 @@ if hf_token:
 
 app = FastAPI()
 
-MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.2"
+MODEL_NAME = "meta-llama/Meta-Llama-3-70B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
 model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map="auto", torch_dtype="auto", use_auth_token=True)
