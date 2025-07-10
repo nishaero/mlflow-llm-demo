@@ -1,0 +1,14 @@
+image:
+  repository: ghcr.io/nishaero/mlflow-llm-demo/llm-api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 8080
+
+hfToken: ""           # <-- pipeline injects base64 token here
+
+resources:
+  limits:
+    nvidia.com/gpu: 1

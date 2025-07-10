@@ -1,29 +1,18 @@
-import time, json
-from fastapi import FastAPI
-from pydantic import BaseModel
-from .llm_runner import generate
-from mlflow_utils import start_run
-import mlflow
+from fastapi import FastAPI, Request
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 app = FastAPI()
 
-class Prompt(BaseModel):
-    prompt: str
-    max_tokens: int = 128
+MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.2"
 
-@app.post("/query")
-def query(body: Prompt):
-    with start_run(tags={"model": "Mistral-7B"}) as run:
-        t0 = time.time()
-        answer = generate(body.prompt, body.max_tokens)
-        latency_ms = int((time.time() - t0) * 1000)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
+model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, device_map="auto", torch_dtype="auto", use_auth_token=True)
 
-        mlflow.log_param("prompt_len", len(body.prompt))
-        mlflow.log_metric("latency_ms", latency_ms)
-        mlflow.log_metric("answer_tokens", len(answer.split()))
+generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
-        # save prompt & answer as artifacts
-        mlflow.log_text(body.prompt, "prompt.txt")
-        mlflow.log_text(answer, "answer.txt")
-
-    return {"answer": answer, "run_id": run.info.run_id}
+@app.post("/generate")
+async def generate_text(request: Request):
+    data = await request.json()
+    prompt = data.get("prompt", "")
+    output = generator(prompt, max_new_tokens=100)
+    return {"response": output[0]["generated_text"]}
