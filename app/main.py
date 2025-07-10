@@ -17,66 +17,14 @@ model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     device_map="auto",
     torch_dtype="auto",
-    load_in_4bit=True,  # bitsandbytes needed
+    load_in_4bit=True,  # requires bitsandbytes in requirements.txt
 )
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
 @app.get("/", response_class=HTMLResponse)
 async def chat_ui():
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>LLM Chat</title>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 30px; background: #f4f4f4;}
-            #chat { width: 100%; max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; }
-            .msg { margin-bottom: 10px; }
-            .user { color: #0b5394; }
-            .bot { color: #38761d; }
-            #input { width: 80%; padding: 8px; }
-            #send { padding: 8px 14px; }
-        </style>
-    </head>
-    <body>
-        <div id="chat">
-            <h2>LLM Chat (Phi-3 Medium 128k)</h2>
-            <div id="messages"></div>
-            <input id="input" type="text" placeholder="Type your message..." autocomplete="off"/>
-            <button id="send">Send</button>
-        </div>
-        <script>
-        const input = document.getElementById('input');
-        const send = document.getElementById('send');
-        const messages = document.getElementById('messages');
-        function addMsg(role, text) {
-            const div = document.createElement('div');
-            div.className = 'msg ' + role;
-            div.innerHTML = '<strong>' + role + ':</strong> ' + text;
-            messages.appendChild(div);
-            messages.scrollTop = messages.scrollHeight;
-        }
-        send.onclick = async function() {
-            const prompt = input.value.trim();
-            if (!prompt) return;
-            addMsg('user', prompt);
-            input.value = '';
-            addMsg('bot', '<em>Thinking...</em>');
-            const resp = await fetch('/generate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt })
-            });
-            const data = await resp.json();
-            messages.lastChild.innerHTML = '<strong>bot:</strong> ' + data.response;
-        };
-        input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') send.onclick();
-        });
-        </script>
-    </body>
-    </html>
-    """
+    with open("app/chat_ui.html", "r", encoding="utf-8") as f:
+        return f.read()
 
 @app.post("/generate")
 async def generate_text(request: Request):

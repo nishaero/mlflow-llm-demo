@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LLM Chat</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root {
+      --background: #18181b;
+      --surface: #23232a;
+      --primary: #10a37f;
+      --primary-light: #1cd9a7;
+      --bot-bg: #22232b;
+      --user-bg: #10a37f22;
+      --text: #f3f3f3;
+      --input-bg: #23232a;
+      --input-border: #39394e;
+      --chat-width: 420px;
+    }
+    body {
+      background: var(--background);
+      margin: 0;
+      font-family: 'Inter', 'Roboto', Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      margin-top: 40px;
+      background: var(--surface);
+      border-radius: 14px;
+      box-shadow: 0 4px 32px #0005;
+      width: var(--chat-width);
+      max-width: 98vw;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .header {
+      font-size: 1.2em;
+      font-weight: 700;
+      background: var(--background);
+      color: var(--primary-light);
+      padding: 18px 24px 12px 24px;
+      border-bottom: 1px solid var(--input-border);
+      letter-spacing: 0.5px;
+    }
+    .chat-area {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .msg-row {
+      display: flex;
+      align-items: flex-end;
+      max-width: 100%;
+    }
+    .msg-row.user {
+      justify-content: flex-end;
+    }
+    .msg-bubble {
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-size: 1em;
+      max-width: 80%;
+      line-height: 1.55;
+      word-break: break-word;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 8px #0001;
+      position: relative;
+      animation: fadein 0.22s;
+    }
+    .msg-row.user .msg-bubble {
+      background: var(--primary);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+      margin-left: 30px;
+      border-color: var(--primary-light);
+    }
+    .msg-row.bot .msg-bubble {
+      background: var(--bot-bg);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+      margin-right: 30px;
+      border-color: #22232b;
+    }
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      margin: 0 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      border: 2px solid var(--input-border);
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #fff;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .msg-row.user .avatar {
+      order: 2;
+      background: var(--primary-light);
+      color: #1a3e30;
+    }
+    .msg-row.bot .avatar {
+      order: 1;
+      background: #39394e;
+      color: #fff;
+    }
+    .input-area {
+      display: flex;
+      border-top: 1px solid var(--input-border);
+      padding: 15px 20px 15px 20px;
+      background: var(--surface);
+      gap: 10px;
+    }
+    .input-box {
+      flex: 1;
+      padding: 11px 16px;
+      border-radius: 7px;
+      border: 1.5px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: 1em;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .input-box:focus {
+      border: 1.5px solid var(--primary-light);
+    }
+    .send-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 0 18px;
+      font-size: 1.08em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .send-btn:active, .send-btn:hover {
+      background: var(--primary-light);
+    }
+    @media (max-width: 520px) {
+      .container { width: 99vw; border-radius: 0; margin-top: 0;}
+      .chat-area { padding: 11px; min-height: 200px;}
+      .header { padding: 12px 13px 8px 13px; }
+      .input-area { padding: 10px 7px; }
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(12px);}
+      to { opacity: 1; transform: none;}
+    }
+    ::-webkit-scrollbar { width: 8px; background: #18181b;}
+    ::-webkit-scrollbar-thumb { background: #23232a;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span style="font-size:1.4em;">🤖</span> LLM Chat
+    </div>
+    <div class="chat-area" id="messages"></div>
+    <form class="input-area" id="chat-form" autocomplete="off">
+      <input id="input" class="input-box" type="text" placeholder="Type your message..." autofocus autocomplete="off"/>
+      <button type="submit" class="send-btn">Send</button>
+    </form>
+  </div>
+  <script>
+    const input = document.getElementById('input');
+    const form = document.getElementById('chat-form');
+    const messages = document.getElementById('messages');
+
+    function addMsg(role, text) {
+      // Avatar: user = U, bot = 🤖
+      const row = document.createElement('div');
+      row.className = 'msg-row ' + role;
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.innerHTML = (role === 'user') ? 'U' : '🤖';
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+      bubble.innerHTML = text;
+      if (role === 'user') {
+        row.appendChild(bubble);
+        row.appendChild(avatar);
+      } else {
+        row.appendChild(avatar);
+        row.appendChild(bubble);
+      }
+      messages.appendChild(row);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // Focus input on load
+    input.focus();
+
+    form.onsubmit = async function(e) {
+      e.preventDefault();
+      const prompt = input.value.trim();
+      if (!prompt) return;
+      addMsg('user', prompt);
+      input.value = '';
+      addMsg('bot', '<em>Thinking...</em>');
+      messages.scrollTop = messages.scrollHeight;
+
+      try {
+        const resp = await fetch('/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt })
+        });
+        const data = await resp.json();
+        messages.lastChild.querySelector('.msg-bubble').innerHTML = data.response;
+      } catch (err) {
+        messages.lastChild.querySelector('.msg-bubble').innerHTML = "<span style='color:#ff6868'>[Error communicating with backend]</span>";
+      }
+    };
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        form.onsubmit(e);
+      }
+    });
+  </script>
+</body>
+</html>
