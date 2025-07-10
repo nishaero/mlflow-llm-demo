@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.1...v1.0.2) (2025-07-10)
+
+### Bug Fixes
+
+* update ui ([48bd347](https://github.com/nishaero/mlflow-llm-demo/commit/48bd34730b1c727f8a4e821d91989108b1265f5a))
+
 ## [1.0.1](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.0...v1.0.1) (2025-07-10)
 
 ### Bug Fixes
