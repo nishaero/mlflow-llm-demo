@@ -1,3 +1,9 @@
+## [1.0.5](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.4...v1.0.5) (2025-07-10)
+
+### Bug Fixes
+
+* update model to meta-llama/Meta-Llama-3-70B-Instruct with 8bit quant ([bd64fc8](https://github.com/nishaero/mlflow-llm-demo/commit/bd64fc854b03c98af7c69e389fa2d0fc3c3fdff6))
+
 ## [1.0.4](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.3...v1.0.4) (2025-07-10)
 
 ### Bug Fixes
