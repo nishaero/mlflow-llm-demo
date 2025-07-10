@@ -24,8 +24,13 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install semantic-release
-        run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github
+      - name: Install semantic-release and plugins
+        run: |
+          npm install -g semantic-release \
+            @semantic-release/git \
+            @semantic-release/changelog \
+            @semantic-release/github \
+            conventional-changelog-conventionalcommits
 
       - name: Run semantic-release (create tag, changelog, and release)
         id: semantic
