@@ -1,3 +1,9 @@
+## [1.0.14](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.13...v1.0.14) (2025-07-11)
+
+### Bug Fixes
+
+* syntax issue ([8dcc75f](https://github.com/nishaero/mlflow-llm-demo/commit/8dcc75fff9dd4b9b95768aacf4e2060970f64e98))
+
 ## [1.0.13](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.12...v1.0.13) (2025-07-11)
 
 ### Bug Fixes
