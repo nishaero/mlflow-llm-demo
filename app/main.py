@@ -2,7 +2,7 @@ import os
 from huggingface_hub import login
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, BitsAndBytesConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 import torch
 from pydantic import BaseModel
 from app.llm_handler import get_llm_response
@@ -29,26 +29,18 @@ def infer(payload: Prompt):
 MODEL_NAME = "meta-llama/Meta-Llama-3-8B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
-quant_config = BitsAndBytesConfig(load_in_8bit=True)
 
-# Select device and dtype based on availability
-if torch.cuda.is_available():
-    device = "cuda"
-    dtype = torch.float16
-else:
-    device = "cpu"
-    dtype = torch.float32
-
+# Force GPU and half precision
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     device_map="auto",
-    torch_dtype=dtype,
+    torch_dtype=torch.float16,
     low_cpu_mem_usage=True,
     use_auth_token=True
 )
-model.to(device)
+model.to("cuda")
 
-generator = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0 if device=="cuda" else -1)
+generator = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0)
 
 @app.get("/", response_class=HTMLResponse)
 async def chat_ui():
