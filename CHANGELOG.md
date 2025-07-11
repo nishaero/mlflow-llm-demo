@@ -1,3 +1,9 @@
+## [1.0.27](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.26...v1.0.27) (2025-07-11)
+
+### Bug Fixes
+
+* enable cuda ([86e6cc7](https://github.com/nishaero/mlflow-llm-demo/commit/86e6cc72e822ef9f7f905c5d2f292563e2a5dc5c))
+
 ## [1.0.26](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.25...v1.0.26) (2025-07-11)
 
 ### Bug Fixes
