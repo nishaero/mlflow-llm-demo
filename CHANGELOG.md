@@ -1,3 +1,9 @@
+## [1.0.13](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.12...v1.0.13) (2025-07-11)
+
+### Bug Fixes
+
+* add pytorch module ([d6985bc](https://github.com/nishaero/mlflow-llm-demo/commit/d6985bc34c32c5ce4951a7e34902e45671be1012))
+
 ## [1.0.12](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.11...v1.0.12) (2025-07-11)
 
 ### Bug Fixes
