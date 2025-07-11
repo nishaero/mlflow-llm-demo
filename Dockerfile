@@ -15,6 +15,13 @@ RUN pip install --upgrade pip
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
+# Install AutoGPTQ with CUDA 12.1 prebuilt wheel for fast GPTQ inference
+RUN pip install auto-gptq --extra-index-url https://huggingface.github.io/autogptq-index/whl/cu121/
+
+# Install llama-cpp-python with CUDA support (if you also use GGUF models)
+RUN pip install --upgrade llama-cpp-python --extra-index-url https://pypi.nvidia.com
+
+
 # Copy application code
 COPY . /app
 WORKDIR /app
