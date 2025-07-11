@@ -32,7 +32,7 @@ quant_config = BitsAndBytesConfig(load_in_8bit=True)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     device_map="auto",
-    torch_dtype="auto",
+    torch_dtype=torch.float16,
     low_cpu_mem_usage=True,
     use_auth_token=True
 )
