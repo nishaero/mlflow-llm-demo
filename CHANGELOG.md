@@ -1,3 +1,9 @@
+## [1.0.12](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.11...v1.0.12) (2025-07-11)
+
+### Bug Fixes
+
+* change torch type to float16 ([22fe39b](https://github.com/nishaero/mlflow-llm-demo/commit/22fe39b1d90eb42834ba5cb610d4548afe5e919b))
+
 ## [1.0.11](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.10...v1.0.11) (2025-07-11)
 
 ### Bug Fixes
