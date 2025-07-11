@@ -1,3 +1,9 @@
+## [1.0.18](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.17...v1.0.18) (2025-07-11)
+
+### Bug Fixes
+
+* update torchdtype to float16 ([02b3f70](https://github.com/nishaero/mlflow-llm-demo/commit/02b3f700111026ecfe80d29f92133a45cd57d695))
+
 ## [1.0.17](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.16...v1.0.17) (2025-07-11)
 
 ### Bug Fixes
