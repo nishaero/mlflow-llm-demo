@@ -1,3 +1,9 @@
+## [1.0.24](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.23...v1.0.24) (2025-07-11)
+
+### Bug Fixes
+
+* add missing openai module ([6c52e84](https://github.com/nishaero/mlflow-llm-demo/commit/6c52e84ea90943329cb295caac4527e67943ea95))
+
 ## [1.0.23](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.22...v1.0.23) (2025-07-11)
 
 ### Bug Fixes
