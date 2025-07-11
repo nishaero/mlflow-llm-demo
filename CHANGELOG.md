@@ -1,3 +1,9 @@
+## [1.0.29](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.28...v1.0.29) (2025-07-11)
+
+### Bug Fixes
+
+* remove gptq ([a3995b9](https://github.com/nishaero/mlflow-llm-demo/commit/a3995b99672cf3102ec455836dab22944e3250f6))
+
 ## [1.0.28](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.27...v1.0.28) (2025-07-11)
 
 ### Bug Fixes
