@@ -15,21 +15,21 @@ RUN pip install --upgrade pip
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-# Install AutoGPTQ with CUDA 12.1 prebuilt wheel for fast GPTQ inference
+# Install AutoGPTQ (CUDA 12.1)
 RUN pip install auto-gptq --extra-index-url https://huggingface.github.io/autogptq-index/whl/cu121/
 
-# Install llama-cpp-python with CUDA support (if you also use GGUF models)
+# Optional: llama-cpp-python (for GGUF models)
 RUN pip install --upgrade llama-cpp-python --extra-index-url https://pypi.nvidia.com
 
-# Optional test
+# Test CUDA extension
 RUN python -c "import auto_gptq.nn_modules.qlinear.qlinear_cuda; print('AutoGPTQ CUDA extension loaded')"
 
 # Copy application code
 COPY . /app
 WORKDIR /app
 
-# Expose port for FastAPI or similar apps
+# Expose FastAPI port
 EXPOSE 8080
 
-# Run the app
+# Run app
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
