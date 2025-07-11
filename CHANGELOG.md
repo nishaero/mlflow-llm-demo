@@ -1,3 +1,9 @@
+## [1.0.16](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.15...v1.0.16) (2025-07-11)
+
+### Bug Fixes
+
+* remove redundant pytorch from requirements ([9a43888](https://github.com/nishaero/mlflow-llm-demo/commit/9a43888cba743781506878809317c7e3f28540ef))
+
 ## [1.0.15](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.14...v1.0.15) (2025-07-11)
 
 ### Bug Fixes
