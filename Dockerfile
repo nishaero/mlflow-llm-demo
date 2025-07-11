@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     git curl unzip build-essential \
     python3-pip python3-dev \
+    supervisor \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip
@@ -14,9 +15,6 @@ RUN pip install --upgrade pip
 # Install Python dependencies
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
-
-# Install additional dependencies
-RUN apt-get update && apt-get install -y supervisor
 
 # Install AutoGPTQ (CUDA 12.1)
 RUN pip install auto-gptq --extra-index-url https://huggingface.github.io/autogptq-index/whl/cu121/
