@@ -3,6 +3,7 @@ from huggingface_hub import login
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, BitsAndBytesConfig
+import torch
 from pydantic import BaseModel
 from app.llm_handler import get_llm_response
 import mlflow
@@ -29,10 +30,17 @@ MODEL_NAME = "meta-llama/Meta-Llama-3-8B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
 quant_config = BitsAndBytesConfig(load_in_8bit=True)
+
+# Select dtype based on device availability
+if torch.cuda.is_available():
+    dtype = torch.float16
+else:
+    dtype = torch.float32
+
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
     device_map="auto",
-    torch_dtype=float16,
+    torch_dtype=dtype,
     low_cpu_mem_usage=True,
     use_auth_token=True
 )
