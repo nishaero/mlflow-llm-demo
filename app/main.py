@@ -31,10 +31,12 @@ MODEL_NAME = "meta-llama/Meta-Llama-3-8B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
 quant_config = BitsAndBytesConfig(load_in_8bit=True)
 
-# Select dtype based on device availability
+# Select device and dtype based on availability
 if torch.cuda.is_available():
+    device = "cuda"
     dtype = float16
 else:
+    device = "cpu"
     dtype = float32
 
 model = AutoModelForCausalLM.from_pretrained(
@@ -44,8 +46,9 @@ model = AutoModelForCausalLM.from_pretrained(
     low_cpu_mem_usage=True,
     use_auth_token=True
 )
+model.to(device)
 
-generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+generator = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0 if device=="cuda" else -1)
 
 @app.get("/", response_class=HTMLResponse)
 async def chat_ui():
