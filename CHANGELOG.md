@@ -1,3 +1,9 @@
+## [1.0.9](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.8...v1.0.9) (2025-07-11)
+
+### Bug Fixes
+
+* update base image to include cuda 12.1 ([37295bd](https://github.com/nishaero/mlflow-llm-demo/commit/37295bd788c44c86919818934640cff986987d28))
+
 ## [1.0.8](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.7...v1.0.8) (2025-07-11)
 
 ### Bug Fixes
