@@ -3,6 +3,7 @@ from huggingface_hub import login
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel
+from torch import float16
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, BitsAndBytesConfig
 
 # Authenticate with Hugging Face
@@ -23,7 +24,9 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map="auto",
     low_cpu_mem_usage=True,
     use_auth_token=True
+    torch_dtype=float16,  # Use float16 for better performance
 )
+
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
 # Serve HTML UI
