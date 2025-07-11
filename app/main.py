@@ -24,7 +24,7 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map="auto",
     low_cpu_mem_usage=True,
     use_auth_token=True,
-    torch_dtype=float16,  # Use float16 for better performance
+    torch_dtype=float16  # Use float16 for better performance
 )
 
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
