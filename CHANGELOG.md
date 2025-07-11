@@ -1,3 +1,9 @@
+## [1.0.19](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.18...v1.0.19) (2025-07-11)
+
+### Bug Fixes
+
+* add cuda build dependencies ([0e76576](https://github.com/nishaero/mlflow-llm-demo/commit/0e765761e4e1393e82e68413c934c1f2336d1ddd))
+
 ## [1.0.18](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.17...v1.0.18) (2025-07-11)
 
 ### Bug Fixes
