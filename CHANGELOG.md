@@ -1,3 +1,9 @@
+## [1.0.10](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.9...v1.0.10) (2025-07-11)
+
+### Bug Fixes
+
+* add mlflow tracing ([227561f](https://github.com/nishaero/mlflow-llm-demo/commit/227561f334df5fc824f0f1c46bf4d86f8992c7dd))
+
 ## [1.0.9](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.8...v1.0.9) (2025-07-11)
 
 ### Bug Fixes
