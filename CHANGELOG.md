@@ -1,3 +1,9 @@
+## [1.0.30](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.29...v1.0.30) (2025-07-11)
+
+### Bug Fixes
+
+* update base image pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime ([1d9efb6](https://github.com/nishaero/mlflow-llm-demo/commit/1d9efb69bb1bad4741b14cdcc62e80e719ec40e8))
+
 ## [1.0.29](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.28...v1.0.29) (2025-07-11)
 
 ### Bug Fixes
