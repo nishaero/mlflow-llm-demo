@@ -11,3 +11,5 @@ bitsandbytes
 llama-cpp-python
 auto-gptq
 optimum
+openai
+
