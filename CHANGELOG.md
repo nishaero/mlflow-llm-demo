@@ -1,3 +1,9 @@
+## [1.0.17](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.16...v1.0.17) (2025-07-11)
+
+### Bug Fixes
+
+* add mlflow along with the app ([0cd46e5](https://github.com/nishaero/mlflow-llm-demo/commit/0cd46e5e18fec65c024ff77716d77df272d68538))
+
 ## [1.0.16](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.15...v1.0.16) (2025-07-11)
 
 ### Bug Fixes
