@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
+FROM pytorch/pytorch:2.5.1-cuda12.1-cudnn9-runtime
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -21,6 +21,8 @@ RUN pip install auto-gptq --extra-index-url https://huggingface.github.io/autogp
 # Install llama-cpp-python with CUDA support (if you also use GGUF models)
 RUN pip install --upgrade llama-cpp-python --extra-index-url https://pypi.nvidia.com
 
+# Optional test
+RUN python -c "import auto_gptq.nn_modules.qlinear.qlinear_cuda; print('AutoGPTQ CUDA extension loaded')"
 
 # Copy application code
 COPY . /app
