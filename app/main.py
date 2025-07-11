@@ -13,13 +13,14 @@ if hf_token:
 app = FastAPI()
 
 # Load tokenizer and model
-MODEL_NAME = "hugging-quants/Meta-Llama-3.1-70B-Instruct-GPTQ-INT4"
+# 🌟 Use smaller LLaMA 8B model with 4-bit quantization
+MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
-quant_config = BitsAndBytesConfig(load_in_8bit=True)
+quant_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype="auto")
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
+    quantization_config=quant_config,
     device_map="auto",
-    torch_dtype="auto",
     low_cpu_mem_usage=True,
     use_auth_token=True
 )
