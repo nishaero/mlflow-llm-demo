@@ -1,3 +1,9 @@
+## [1.0.26](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.25...v1.0.26) (2025-07-11)
+
+### Bug Fixes
+
+* update torch ([225c3de](https://github.com/nishaero/mlflow-llm-demo/commit/225c3de122f825b230963d6e9d686cbfd643eece))
+
 ## [1.0.25](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.24...v1.0.25) (2025-07-11)
 
 ### Bug Fixes
