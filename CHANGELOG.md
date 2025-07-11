@@ -1,3 +1,9 @@
+## [1.0.22](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.21...v1.0.22) (2025-07-11)
+
+### Bug Fixes
+
+* install supervisor ([ee5c878](https://github.com/nishaero/mlflow-llm-demo/commit/ee5c878ccd273f03f0ae74b043768c0102371b6e))
+
 ## [1.0.21](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.20...v1.0.21) (2025-07-11)
 
 ### Bug Fixes
