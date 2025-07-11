@@ -33,9 +33,9 @@ quant_config = BitsAndBytesConfig(load_in_8bit=True)
 
 # Select dtype based on device availability
 if torch.cuda.is_available():
-    dtype = torch.float16
+    dtype = float16
 else:
-    dtype = torch.float32
+    dtype = float32
 
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
