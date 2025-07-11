@@ -1,3 +1,9 @@
+## [1.0.23](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.22...v1.0.23) (2025-07-11)
+
+### Bug Fixes
+
+* remove helm dir which is unused ([2c7af30](https://github.com/nishaero/mlflow-llm-demo/commit/2c7af30b8cf461bacf7a94d2e9b21c73620afde1))
+
 ## [1.0.22](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.21...v1.0.22) (2025-07-11)
 
 ### Bug Fixes
