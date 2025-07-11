@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     git curl unzip build-essential \
     python3-pip python3-dev \
+    cuda-nvcc-12-1 cuda-cudart-dev-12-1 cuda-command-line-tools-12-1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip
