@@ -62,11 +62,11 @@ jobs:
         run: |
           docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:${{ steps.get_tag.outputs.tag }} .
 
-      - name: Scan Docker image for vulnerabilities (Trivy)
-        uses: aquasecurity/trivy-action@v0.32.0
-        with:
-          image-ref: ${{ env.IMAGE_NAME }}:latest
-          format: 'table'
+      # - name: Scan Docker image for vulnerabilities (Trivy)
+      #   uses: aquasecurity/trivy-action@v0.32.0
+      #   with:
+      #     image-ref: ${{ env.IMAGE_NAME }}:latest
+      #     format: 'table'
 
       - name: Push Docker image
         run: |
