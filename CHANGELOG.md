@@ -1,3 +1,9 @@
+## [1.0.8](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.7...v1.0.8) (2025-07-11)
+
+### Bug Fixes
+
+* install gptq and llama-cpp-python ([4c7d266](https://github.com/nishaero/mlflow-llm-demo/commit/4c7d266b65589709d406ef9d71c6310e9930b4ba))
+
 ## [1.0.7](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.6...v1.0.7) (2025-07-10)
 
 ### Bug Fixes
