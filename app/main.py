@@ -2,43 +2,58 @@ import os
 from huggingface_hub import login
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
-from pydantic import BaseModel
-from torch import float16
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, BitsAndBytesConfig
+from pydantic import BaseModel
+from app.llm_handler import get_llm_response
+import mlflow
 
-# Authenticate with Hugging Face
+# Login to Hugging Face
 hf_token = os.getenv("HUGGINGFACE_HUB_TOKEN")
 if hf_token:
     login(token=hf_token)
 
+mlflow.set_tracking_uri("http://localhost:5000")
+mlflow.set_experiment("llm-inference")
+
 app = FastAPI()
 
-# Load tokenizer and model
-# 🌟 Use smaller LLaMA 8B model with 4-bit quantization
-MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+class Prompt(BaseModel):
+    prompt: str
+
+@app.post("/inference")
+def infer(payload: Prompt):
+    result = get_llm_response(payload.prompt)
+    return {"response": result}
+
+MODEL_NAME = "meta-llama/Meta-Llama-3-8B-Instruct"
+
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_auth_token=True)
-quant_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype="auto")
+quant_config = BitsAndBytesConfig(load_in_8bit=True)
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
-    quantization_config=quant_config,
     device_map="auto",
+    torch_dtype="auto",
     low_cpu_mem_usage=True,
-    use_auth_token=True,
-    torch_dtype=float16  # Use float16 for better performance
+    use_auth_token=True
 )
 
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
-# Serve HTML UI
 @app.get("/", response_class=HTMLResponse)
 async def chat_ui():
     with open("app/chat_ui.html", "r", encoding="utf-8") as f:
         return f.read()
 
-# Accept prompt and return model response
 @app.post("/generate")
 async def generate_text(request: Request):
     data = await request.json()
     prompt = data.get("prompt", "")
     output = generator(prompt, max_new_tokens=256)
-    return JSONResponse({"response": output[0]["generated_text"]})
+    response = output[0]["generated_text"]
+
+    with mlflow.start_run():
+        mlflow.log_param("prompt", prompt)
+        mlflow.log_metric("response_length", len(response))
+        mlflow.log_text(response, "response.txt")
+
+    return JSONResponse({"response": response})

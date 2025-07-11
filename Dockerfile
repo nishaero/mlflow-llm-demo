@@ -29,7 +29,8 @@ COPY . /app
 WORKDIR /app
 
 # Expose FastAPI port
-EXPOSE 8080
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Run app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+EXPOSE 8080 5000
+
+CMD ["/usr/bin/supervisord"]
