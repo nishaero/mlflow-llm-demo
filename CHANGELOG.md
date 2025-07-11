@@ -1,3 +1,15 @@
+## [1.0.25](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.24...v1.0.25) (2025-07-11)
+
+### Bug Fixes
+
+* add a condition for torch usage ([d36a573](https://github.com/nishaero/mlflow-llm-demo/commit/d36a573913458e62d56d4ada4f1445603abae193))
+* disable image scan ([c6936ad](https://github.com/nishaero/mlflow-llm-demo/commit/c6936ad1e9d5f7f83ba9a2815634af70c4119e6e))
+* remove requirements.txt from workflow ([e52b1e5](https://github.com/nishaero/mlflow-llm-demo/commit/e52b1e569837af23fb17965fb1ebccfea36ede34))
+* revert workflow code ([d2e3287](https://github.com/nishaero/mlflow-llm-demo/commit/d2e3287bf035fc3c21f2356269986b48bf57c478))
+* torch=float16 ([6918054](https://github.com/nishaero/mlflow-llm-demo/commit/691805414c94e370182f2d42485ebdbb1753f8a3))
+* update trivy image ([8b0eeb5](https://github.com/nishaero/mlflow-llm-demo/commit/8b0eeb54872ca4c71adcf9dd20bd0380621f8301))
+* update workflow ([5615df2](https://github.com/nishaero/mlflow-llm-demo/commit/5615df213a1508649c2b40239a09dc0a50128f56))
+
 ## [1.0.24](https://github.com/nishaero/mlflow-llm-demo/compare/v1.0.23...v1.0.24) (2025-07-11)
 
 ### Bug Fixes
